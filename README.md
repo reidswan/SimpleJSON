@@ -21,7 +21,7 @@ The bulk of the library, with functions for creating JSONValue data from strings
   * `showJSONObject` - converts a supplied JSON value into a correctly formatted string in compact form
     * if the value is a JSON object or array, returns its string representation
     * otherwise, places the value into a singleton array and returns its string representation
-  * `prettyPrintJSONObject` - converts a suppled JSON value into a correctly formatted string in human-intended form
+  * `prettyPrintJSONObject` - converts a supplied JSON value into a correctly formatted string in human-intended form
     * same conditions as `showJSONObject`
 
 ## SimpleJSON.IO
