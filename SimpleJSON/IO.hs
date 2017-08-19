@@ -11,10 +11,6 @@ import           Control.DeepSeq
 import           SimpleJSON
 import           System.IO
 
-forceRead :: [a] -> ()
-forceRead []     = ()
-forceRead (x:xs) = forceRead xs
-
 readJSONFile :: FilePath -> IO JSONValue
 -- Reads the JSON file at the given file path, returning the contained value
 readJSONFile filename = do

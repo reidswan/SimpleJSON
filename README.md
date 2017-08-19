@@ -33,4 +33,4 @@ A set of helper functions for JSON file IO
   * all of these functions also have alternatives taking file `Handle`s instead of filenames: `hReadJSONFile`, `hWriteJSONFile`, `hPrettyWriteJSONFile`
 
 # Limitations and Issues
-The number format does not allow exponentiation style numbers (e.g. `10e-5`)
+Note that there are safety issues with having an array as a top level JSON object if the .json file is sent to a JavaScript parser

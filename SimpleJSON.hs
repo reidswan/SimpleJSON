@@ -91,6 +91,10 @@ data NumberState = Begin
                 | Digits Bool String
                 | DecimalPoint Bool String
                 | DecimalDigit Bool String
+                | ExpPart Bool String
+                | Exponent Bool String
+                | ZExpPart
+                | ZExponent
                 | Fail
                 | Success String
 
@@ -107,10 +111,12 @@ numberStateMap Negated c
     | isDigit c = Digits True [c]
     | otherwise = Fail
 numberStateMap (Zero b) '.' = DecimalPoint b "0."
+numberStateMap (Zero b) 'e' = ZExpPart
 numberStateMap (Zero _) c
     | isDigit c = Fail
     | otherwise = Success "0"
 numberStateMap (Digits b str) '.' = DecimalPoint b (str ++ ".")
+numberStateMap (Digits b str) 'e' = ExpPart b (str ++ "e")
 numberStateMap (Digits b str) c
     | isDigit c = Digits b (str ++ [c])
     | otherwise = Success (if b then '-':str else str)
@@ -119,6 +125,19 @@ numberStateMap (DecimalPoint b str) c
     | otherwise = Fail
 numberStateMap (DecimalDigit b str) c
     | isDigit c = DecimalDigit b (str ++ [c])
+    | c == 'e' = ExpPart b (str ++ "e")
+    | otherwise = Success (if b then '-':str else str)
+numberStateMap ZExpPart c
+    | isDigit c = ZExponent
+    | otherwise = Fail
+numberStateMap (ExpPart b str) c
+    | isDigit c = Exponent b (str ++ [c])
+    | otherwise = Fail
+numberStateMap ZExponent c
+    | isDigit c = ZExponent
+    | otherwise = Success "0"
+numberStateMap (Exponent b str) c
+    | isDigit c = Exponent b (str ++ [c])
     | otherwise = Success (if b then '-':str else str)
 numberStateMap _ _ = Fail
 
