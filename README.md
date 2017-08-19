@@ -8,7 +8,7 @@ The library includes two modules: SimpleJSON and SimpleJSON.IO
 ## SimpleJSON
 The bulk of the library, with functions for creating JSONValue data from strings and vice versa 
 * Defines the JSONValue data type for representing JSON in Haskell code
-  * Supports all [ECMA Standard 404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf) types: null, boolean, string, array, and object
+  * Supports all [ECMA Standard 404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf) types: null, boolean, number, string, array, and object
   * Has instance Show for automatic conversion to an equivalent string using Haskell's `show` function.
 * Exports the following functions:
   * `readJSON` - safely reads the first JSON Value in a given string
