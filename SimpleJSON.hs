@@ -214,6 +214,7 @@ takeObjectKey ('"':cs) dict = case delim stringMatch ":" ('"':cs) of
 takeObjectKey ('}':cs) dict = (Just $ JObject dict, chompSpaces cs)
 takeObjectKey (x:xs) dict
     | whitespace x = takeObjectKey (chompSpaces xs) dict
+    | otherwise = (Nothing, x:xs)
 
 takeObjectVal :: String -> String -> Map.Map String JSONValue -> (Maybe JSONValue, String)
 -- helper function of objectMatch : with a given key, get the corresponding value
